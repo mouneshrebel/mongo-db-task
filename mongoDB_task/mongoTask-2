@@ -1,0 +1,202 @@
+1. Find all the topics and tasks which are thought in the month of October ?
+Ans:
+  db.guvidata.find({},{_id : 0,date  : "2020-10",topics : 1 ,task : 1});
+  
+  output :  {
+    "topics": "JavaScript Basics",
+    "task": "submit",
+    "date": "2020-10"
+  },
+  {
+    "topics": "Arrays and Objects",
+    "task": "pending",
+    "date": "2020-10"
+  },
+  {
+    "task": "submit",
+    "topics": "Functions and Scope",
+    "date": "2020-10"
+  },
+  {
+    "topics": "map,reduce",
+    "task": "pending",
+    "date": "2020-10"
+  },
+  {
+    "topics": "filter",
+    "task": "pending",
+    "date": "2020-10"
+  },
+  {
+    "topics": "promise",
+    "task": "submit",
+    "date": "2020-10"
+  },
+  {
+    "topics": "fetch,then",
+    "task": "pending",
+    "date": "2020-10"
+  },
+  {
+    "topics": "DOM",
+    "task": "pending",
+    "date": "2020-10"
+  }
+2. Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020?
+Ans:
+ db.guvidata.find({date : {$gte : "2020-10-15" , $lte : "2020-10-31"}});
+ 
+output : 
+{
+    "_id": {
+      "$oid": "6479c8fa7a16814dbfb161b7"
+    },
+    "user_id": 2,
+    "name": "Sam",
+    "email": "sam@example.com",
+    "problems_solved": 15,
+    "date": "2020-10-24",
+    "status": "present",
+    "topics": "Arrays and Objects",
+    "task": "pending",
+    "company": "info tech"
+  },
+  {
+    "_id": {
+      "$oid": "6479c8fa7a16814dbfb161b8"
+    },
+    "uset_id": 3,
+    "name": "Tom",
+    "email": "tom@example.com",
+    "problems_solved": 8,
+    "date": "2020-10-15",
+    "status": "absent",
+    "task": "submit",
+    "topics": "Functions and Scope",
+    "company": "Tcs"
+  },
+  {
+    "_id": {
+      "$oid": "6479c8fa7a16814dbfb161bb"
+    },
+    "uset_id": 6,
+    "name": "Jack",
+    "email": "jack@example.com",
+    "problems_solved": 16,
+    "date": "2020-10-28",
+    "status": "absent",
+    "topics": "promise",
+    "company": "Hcl",
+    "task": "submit"
+  },
+  {
+    "_id": {
+      "$oid": "6479c8fa7a16814dbfb161bc"
+    },
+    "uset_id": 7,
+    "name": "Aji",
+    "email": "aji@example.com",
+    "problems_solved": 12,
+    "date": "2020-10-30",
+    "status": "absent",
+    "topics": "fetch,then",
+    "company": "guvi",
+    "task": "pending"
+  },
+  {
+    "_id": {
+      "$oid": "6479c8fa7a16814dbfb161bd"
+    },
+    "uset_id": 8,
+    "name": "Sandy",
+    "email": "sandy@example.com",
+    "problems_solved": 25,
+    "date": "2020-10-15",
+    "status": "absent",
+    "topics": "DOM",
+    "company": "google",
+    "task": "pending"
+  }
+  
+ 3. Find all the company drives and students who are appeared for the placement ?
+Ans : 
+  db.guvidata.find({},{ _id : 0 ,drive_id : 1});
+output :
+ {
+    "drive_id": "drive1"
+  },
+  {
+    "drive_id": "drive2"
+  },
+4.  Find the number of problems solved by the user in codekata?
+Ans :
+  db.guvidata.find({},{ problems_solved : 1});
+output :  {
+    "problems_solved": 10
+  },
+  {
+    "problems_solved": 15
+  },
+  {
+    "problems_solved": 8
+  },
+  {
+    "problems_solved": 23
+  },
+  {
+    "problems_solved": 21
+  },
+  {
+    "problems_solved": 16
+  },
+  {
+    "problems_solved": 12
+  },
+  {
+    "problems_solved": 25
+  }
+ 5. Find all the mentors with who has the mentee's count more than 15;
+Ans:
+db.guvidata.find({mentees_count : {$gt : 15}});
+
+ouput : 
+{
+    "_id": {
+      "$oid": "6479d0d37f6ed0a803649bbe"
+    },
+    "mentor_id": 1,
+    "name": "John",
+    "email": "john@example.com",
+    "mentees_count": 20
+  },
+  {
+    "_id": {
+      "$oid": "6479d0d37f6ed0a803649bbf"
+    },
+    "mentor_id": 2,
+    "name": "Alice",
+    "email": "alice@example.com",
+    "mentees_count": 18
+  },
+  {
+    "_id": {
+      "$oid": "6479d0d37f6ed0a803649bc0"
+    },
+    "mentor_id": 3,
+    "name": "Mike",
+    "email": "mike@example.com",
+    "mentees_count": 25
+  },
+  {
+    "_id": {
+      "$oid": "6479d0d37f6ed0a803649bc2"
+    },
+    "mentor_id": 5,
+    "name": "David",
+    "email": "david@example.com",
+    "mentees_count": 30
+  }
+6. Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
+Ans:
+ db.guvidata.countDocuments({date : {$gt : "2020-10-15" , $lte : "2020-10-31"},status : "absent",task : {$ne : "submit"}});
+output : 1
